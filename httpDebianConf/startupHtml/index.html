@@ -1,0 +1,64 @@
+<!--Pagina Estatica StartUp-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" name="keywords" lang="es" content="startup"/>
+        <title>StartUp Estatica</title>
+        <link rel="stylesheet" type="text/css" href="./estilo.css"/>
+    </head>
+<body>
+    <header>
+    
+        <div>
+            <!--He utilizado parte del código de la práctica de lenguajes basados en XML para personalizar 
+            la página-->  
+            <svg id="logo" height="150" width="700">
+                <ellipse cx="350" cy="75" rx="300" ry="55" fill="white" />
+                <text fill="black" font-size="45" font-family="Arial" x="50" y="86">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STARTUP</text>
+                <rect x="00" y="00" width="700" height="150" style="fill:rgb(101, 233, 226);stroke:black;stroke-width:5;opacity:0.30" />
+                </svg>
+            
+        </div>
+        <h3>INICIO</h3>
+        <nav><!--Barra de navegación común para todas las páginas-->
+            <ul>
+                <li><a href="./index.html" id="index">INICIO</a></li>
+                <li>ENLACE 1</li>
+                <li>ENLACE 2</li>
+                <li>ENLACE 3</li>
+                <li>ENLACE 4</li>             
+            </ul>
+        </nav><!--Para ofrecer otra funcionalidad a la página hemos incluido un reloj con fecha y hora, insertado en un iframe y con licencia CC-->
+        <div id="reloj"><iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=small&timezone=Europe%2FMadrid" width="700" height="90" ></iframe></div>
+        <div id="reloj"><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/"><img id="creative" alt="Licencia de Creative Commons" style="border-width:0" 
+            src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>Este widget está bajo una <a rel="license" target="_blank" href="http://creativecommons.org/licenses/
+            by-sa/4.0/">licencia de Creative Commons Reconocimiento-CompartirIgual 4.0 Internacional</a>.
+        </div>
+    </header>
+        <div class="introindex"><!--Siendo la página de inicio se ha hecho una breve exposición de motivos y/o justificación para dar pie al resto de páginas-->
+        <p>Esta web nace de la necesidad de información por parte de los ciudadanos frente a este nuevo enemigo revelado, la COVID-19.</p>
+        <p>Se ha recopilado información epidemiológica de las principales fuentes de la región y se han compartido gráficas 
+        para visualizar los datos más relevantes y necesarios para comprender la situación actual.</p>
+        <p>Nuestra misión por tanto, partiendo de la evolución desde el inicio de la pandemia; será describir la realidad existente, cruda, 
+        verosimil y sobre todo actual.</p>
+        </div>
+           
+    </aside>
+    <footer>
+        <div><!--pie de página común a todas las páginas, autor/contacto/boton de enlace a la cabecera-->
+           <strong>Autor: Raúl Martínez Pérez</strong>
+           <p>Creado en Mayo de 2022</p>
+           <p>Contacto: rmartinez43@ieszaidinvergeles.org</p>
+           <a href=#imagen id=retorno>Pulsa para volver a la cabecera</a>
+        </div>
+        <div><!--Este div se ha insertado desde la pagina oficial de creative commons, ya que se ha tomado esta licencia
+        RECONOCIMIENTO-NOCOMERCIAL 4.0 INTERNACIONAL. Se han adaptado todos los target para que se abran en una ventana
+        nueva, tal y como requiere la practica.-->
+            <a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">
+            <img id="creative" alt="Licencia de Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"/>
+            </a>
+            <p>Este obra está bajo una </p><a rel="license" target= "_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">licencia de Creative Commons Reconocimiento-NoComercial 4.0 Internacional</a>
+        </div>
+    </footer>
+</body>
+</html>
