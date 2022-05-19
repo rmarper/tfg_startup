@@ -1,0 +1,64 @@
+    3  vi /etc/sysconfig/network-scripts/ifcfg-enp0s3 
+    4  systemctl restart network.service
+    5  ip add
+    6  yum install nano
+    9  nano hostname 
+   10  reboot
+   15  firewall-cmd --permanent --add-port=5666/tcp
+   16  firewall-cmd -reloap
+   17  firewall-cmd -reload
+   18  firewall-cmd --reload
+   19  systemctl reboot
+   20  yum install -y gcc glibc-common openssl openssl-devel perl wget
+   21  useradd nagios
+   25  wget https://github.com/nagios-plugins/nagios-plugins/releases/download/release-2.2.1/nagios-plugins-2.2.1.tar.gz
+   28  tar -zxvf nagios-plugins-2.2.1.tar.gz
+   29  ls
+   30  cd nagios-plugins-2.2.1
+   31  ls
+   32  ./configure
+   33  make install
+   36  wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-4.0.3/nrpe-4.0.3.tar.gz
+   37  tar -zxvf nrpe-4.0.3.tar.gz 
+   38  ls
+   39  cd nrpe-4.0.3
+   40  ls
+   41  ./configure
+   42  make all
+   43  make install
+   44  make install-config
+   45  make install-init
+   46  cd /usr/local/nagios/etc/
+   48  nano nrpe.cfg 
+   49  systemctl enable nrpe
+   50  systemctl start nrpe
+  116  yum install bind bind-utils -y
+  120  nano /etc/named.conf 
+  124  cd /var/named
+  125  ls
+  126  cat named.localhost 
+  127  cp ./named.localhost /var/named/forward.startup
+  128  cp ./named.loopback /var/named/reverse.startup
+  132  systemctl enable named
+  133  systemctl start named
+  135  systemctl status named.service
+  145  nano /var/named/forward.startup 
+  148  named-checkzone startup.net /var/named/forward.startup 
+  157  nano /var/named/reverse.startup 
+  158  named-checkzone 30.168.192.in-addr.arpa. /var/named/reverse.startup 
+  160  systemctl restart named
+  176  named-checkconf /etc/named.conf
+  162  systemctl status named.service
+  167  chmod 777 /var/named/forward.startup 
+  168  chmod 777 /var/named/reverse.startup 
+  169  systemctl restart named.service
+  170  systemctl status named.service
+  172  firewall-cmd --permanent --add-port=53/udp
+  173  firewall-cmd --reload
+  174  systemctl restart named.service
+  175  systemctl status named.service
+  292  mv check_mem.pl /usr/local/nagios/libexec/check_mem
+  293  cd /usr/local/nagios/libexec/
+  294  chmod +x check_mem
+  295  ./check_mem -f -w 20 -c 10
+  296  systemctl restart nrpe 

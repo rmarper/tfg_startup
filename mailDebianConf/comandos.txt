@@ -1,16 +1,16 @@
    68  nano /etc/network/interfaces
-   69  systemctl restart network.service
    70  reboot
    71  ip -c a
-   72  ping www.google.es
-   73  ping 192.168.11.10
+   79  firewall-cmd --permanent --add-port=5666
+   80  apt-get install firewall
+   81  apt-get install firewall-cmd
+   82  apt-get install -y gcc glibc-common
    98  apt update
    99  apt remove apparmor
   100  apt-get install selinux-basics selinux-policy-default auditd 
   101  cd
   102  selinux-activate
   103  reboot
-  104  reboot
   105  cd /etc/selinux/
   106  ls
   107  nano config
@@ -30,7 +30,7 @@
   122  wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-4.0.3/nrpe-4.0.3.tar.gz
   123  ls
   124  tar -zxvf nrpe-4.0.3.tar.gz 
-  146  cd nrpe-4.0.3/
+  125  cd nrpe-4.0.3/
   147  ./configure
   148  make all
   149  make install
@@ -38,27 +38,30 @@
   151  make install-init
   152  cd /usr/local/nagios/etc/
   163  nano nrpe.cfg
-  164  systemctl status nrpe.service 
-  165  systemctl enable nrpe.service
-  166  systemctl start nrpe.service
-  167  systemctl status nrpe.service 
-  196  cd /var/www/html/
-  220  apt install openssh-client
-  221  ip -c a
-  222  cd /etc/ssh
-  223  ls
-  224  nano sshd_config
-  228  systemctl restart sshd
-  229  nano sshd_config
-  231  systemctl restart sshd
-  232  cd /usr/local/nagios/etc/
-  233  nano nrpe.cfg 
-  236  cd /var/www/html
-  422  cd /etc/apache2/sites-available/
-  465  a2ensite startup.conf 
-  467  systemctl reload apache2
+  182  systemctl enable nrpe
+  183  systemctl start nrpe
+  184  systemctl status nrpe
+  185  nano nrpe.cfg 
+  218  apt install postfix
+  219  nano /etc/postfix/main.cf
+  220  systemctl restart postfix
+  221  systemctl status postfix
+  222  apt install dovecot-imapd dovecot-pop3d 
+  223  nano /etc/dovecot/conf.d/10-mail.conf 
+  225  cd /etc/skel
+  226  mkdir Maildir
+  227  cd Maildir/
+  228  maildirmake.dovecot  ./
+  229  ls
+  230  adduser rmartinez
+  231  adduser sofiamp
+  232  systemctl restart dovecot.service 
+  233  systemctl status dovecot.service 
   292  mv check_mem.pl /usr/local/nagios/libexec/check_mem
   293  cd /usr/local/nagios/libexec/
-  294  chmod +x check_mem
+  294  chmod +x check_mem 
   295  ./check_mem -f -w 20 -c 10
-  296  systemctl restart nrpe 
+  296  systemctl restart nrpe
+  301  hostnamectl
+  302  systemctl status postfix
+  303  systemctl status dovecot
