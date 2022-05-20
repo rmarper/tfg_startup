@@ -1,0 +1,61 @@
+﻿; Undocumented section
+[/modules]
+
+; CheckDisk
+CheckDisk = enabled
+
+; Event log Checker
+CheckEventLog = enabled
+
+; Check External Scripts
+CheckExternalScripts = enabled
+
+; Helper function
+CheckHelpers = enabled
+
+; Check NSCP
+CheckNSCP = enabled
+
+; CheckSytem
+CheckSystem = enabled
+
+; CheckWMI
+CheckWMI = 1
+
+; NRPE server
+NRPEServer = enabled
+
+; NSClient server
+NSClientServer = enabled
+
+; Undocumented
+[/settings/default]
+
+; ALLOWED HOSTS
+allowed hosts = 192.168.11.10
+
+[/settings/external scripts]
+allow arguments = true
+
+[/settings/external scripts/wrapped scripts]
+check_replica=check_replica.ps1
+
+[/settings/external scripts/alias]
+
+alias_cpu = checkCPU warn=70 crit=80 time=1m time=30s
+
+alias_cpu_ex = checkCPU warn=$ARG1$ crit=$ARG2$ time=5m time=1m time=30s
+
+alias_disk = CheckDriveSize MinWarn=10% MinCrit=5% CheckAll FilterType=FIXED
+
+alias_disk_loose = CheckDriveSize MinWarn=10% MinCritic=5% CheckAll FilterType=FIXED ignore-unreadable
+
+alias_file_size = CheckFiles "filter=size > $ARG2$" "path=$ARG1$ MaxWarn=1 MaxCrit=1 "syntax=%filename% %size%" max-dir-depth=10
+
+alias_file_age = checkFile2 filter=out "file=$ARG1$" filter-written=>1d MaxWarn=1 MaxCrit=1 "syntax=%filename% %write%"
+
+alias_mem = checkMem MaxWarn=80% MaxCrit=90% ShowAll=long type=physical type=virtual type=paged type=page
+
+alias_service = checkServiceState CheckAll
+
+alias_service_ex = checkServiceState CheckAll "exclude=Net Driver HPZ12" "exclude=Pml Driver HPZ12" exclude=stisvc
