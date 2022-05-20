@@ -1,0 +1,91 @@
+       apt-get update
+
+       apt-get upgrade
+
+    1  cd /etc
+
+    7  apt remove apparmor
+
+    8  apt-get install selinux-basics selinux-policy-default auditd
+
+    9  selinux-activate 
+
+   10  reboot
+
+   19  apt-get update
+
+   20  apt-get install openssl libssl-dev
+
+   21  wget https://github.com/nagios-plugins/nagios-plugins/releases/download/release-2.2.1/nagios-plugins-2.2.1.tar.gz
+
+   22  ls
+
+   23  tar -xzvf nagios-plugins-2.2.1.tar.gz 
+
+   24  ls
+
+   25  cd nagios-plugins-2.2.1
+
+   28  useradd nagios
+
+   26  ./configure
+
+   27  make install
+
+   29  ./configure
+
+   33  wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-4.0.3/nrpe-4.0.3.tar.gz
+
+   34  ls
+
+   35  tar -xzvf nrpe-4.0.3.tar.gz 
+
+   36  ls
+
+   37  cd nrpe-4.0.3
+
+   39  ./configure 
+
+   40  make all
+
+   41  make install
+
+   42  make install-config
+
+   43  make install-init
+
+   44  df -h
+
+   45  cd /usr/local/nagios/etc/
+
+   46  ls
+
+   47  nano nrpe.cfg 
+
+   48  systemctl enable nrpe
+
+   49  systemctl start nrpe
+
+   50  systemctl status nrpe
+
+   51  poweroff
+
+   52  exit
+
+   66  mv check_mem.pl /usr/local/nagios/libexec/check_mem
+
+   67  cd check_mem.pl /usr/local/nagios/libexec/
+
+   68  cd /usr/local/nagios/libexec/
+
+   69  chmod +x check_mem 
+
+   70  ./check_mem -f -w 20 -c 10
+
+   71  systemctl restart nrpe
+
+   73  nano /usr/local/nagios/etc/nrpe.cfg
+
+   71  systemctl restart nrpe
+
+   72  poweroff
