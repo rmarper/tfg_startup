@@ -1,0 +1,104 @@
+vi /etc/sysconfig/network-scripts/ifcfg-enp0s3 
+fg
+systemctl restart network.service
+ip add
+yum install iputils
+ping www.google.es
+yum groupinstall 'kde' 'X Window System' -y
+init 6 
+systemctl set-default graphical.target
+init 6
+yum -y update
+yum install -y bzip2 gcc prl kernel-devel kernel-headers
+sudo yum -y groupinstall Development Tools
+sudo yum -y install kernel-devel
+sudo yum install epel-release
+sudo yum install dkms
+reboot 
+mount /dev/sr0 /media
+cd /media 
+./VBoxLinuxAdditions.run 
+reboot
+yum install wget
+yum install nano
+yum install -y wget httpd php gcc glibc glibc-common gd gd-devel make net-snmp net-snmp-perl openldap openldap-devel mysql-devel mysql-libs net-snmp-devel postgresql-libs postgresql-devel dos2unix
+useradd nagios
+groupadd nagcmd
+usermod -a -G nagioscmd nagios
+passwd nagios #1e2f3m#
+usermod -a -G nagioscmd apache
+wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.1.1.tar.gz
+tar -xzvf nagios-4.1.1.tar.gz 
+cd nagios-4.1.1
+./configure --with-command-group=nagioscmd
+make all
+make install
+make install-init
+make install-commandmode
+make install-config
+make install-webconf
+cp -R contrib/eventhandlers/ /usr/local/nagios/libexec/
+chown -R nagios:nagios /usr/local/nagios/libexec/eventhandlers
+systemctl enable nagios
+systemctl enable httpd
+service nagios start
+service httpd start
+htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+wget https://github.com/nagios-plugins/nagios-plugins/releases/download/release-2.2.1/nagios-plugins-2.2.1.tar.gz
+tar -zxvf nagios-plugins-2.2.1.tar.gz
+cd nagios-plugins-2.2.1
+ls
+./configure
+make install (para compilar e instalar en un solo paso)
+Systemctl restart nagios
+Cd /usr/local/nagios/libexec (plugins instalados)
+./check_nt –-help (para comprobar funcionamiento y argumentos del plugin)
+wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-4.0.3/nrpe-4.0.3.tar.gz
+ls
+tar -xzvf nrpe-4.0.3.tar.gz 
+ls
+cd nrpe-4.0.3
+ls
+./configure (crea llaves de seguridad para comunicación ssl )(recordar puerto 5666 firewall – compilación)
+make all
+make install
+make install-config
+make install-init
+systemctl enable nrpe
+systemctl start nrpe
+make check nrpe (ejecutable que se ejecuta cada vez que queremos hacer una consulta a un servidor por medio de nagios)
+make install plugin (copia el plugin nrpe en el directorio que tenemos todos los ejecutables)
+cd /usr/local/nagios/etc/objects/
+ls
+nano commands.cfg 
+cd /usr/local/nagios/etc
+$USER1$=/usr/local/nagios/libexec
+./check_nrpe -H 192.168.11.11
+nano .bashrc
+source .bashrc
+/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg 
+Nagioscheck
+cd /usr/local/nagios/etc/objects
+nano localhost.cfg 
+/usr/local/nagios/bin/nagios -v /usr/local/nagios/etc/nagios.cfg 
+systemctl restart nrpe
+systemctl restart nagios
+ip add
+firewall-cmd --permanent --add-port=5666/tcp
+firewall-cmd --reload
+yum install mailx
+cd /usr/local/nagios/etc/objects/
+cp contacts.cfg contacts.cfg.old
+cp templates.cfg templates.cfg.old
+cp commands.cfg commands.cfg.old
+nano contacts
+ls
+nano commands.cfg
+nano contacts.cfg
+nano templates.cfg
+nano /etc/mail.rc
+echo -e "correo test" | mail -s "correo de prueba" rmarper.asir@gmail.com
+systemctl restart nagios
+  
+
+
