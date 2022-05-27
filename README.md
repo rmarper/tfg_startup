@@ -1,5 +1,5 @@
 # tfg_startup
 ## Sistema de Monitorización con Nagios Core.
-### Autor: Raúl Martínez Pérez Mayo 2022
-###Archivos de configuración y documentación del Proyecto Integrado.
+### Raúl Martínez Pérez en Granada. Mayo 2022.
+#### Archivos de configuración del Proyecto Integrado para el Grado Superior de Administración de Sistemas Informaticos.
 
